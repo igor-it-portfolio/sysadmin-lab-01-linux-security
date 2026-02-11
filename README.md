@@ -1,36 +1,62 @@
-# 🔐 Servidor Linux Seguro
+# 🔐 Servidor Linux Seguro: Guia de Hardening
 
-Projeto prático de SysAdmin focado em segurança básica de servidores Linux,
-simulando a entrega de um servidor para um cliente real.
+Projeto prático de SysAdmin focado em segurança de infraestrutura, simulando a entrega de um servidor robusto e pronto para produção para um cliente real.
 
 ## 🎯 Objetivo
-Criar e proteger um servidor Linux aplicando boas práticas de segurança,
-controle de acesso e firewall.
+Criar e proteger um servidor Linux aplicando as melhores práticas de segurança, controle rígido de acesso e políticas de firewall para mitigar ataques comuns.
 
 ## 🛠️ Tecnologias Utilizadas
-- Linux (Ubuntu Server)
-- AWS EC2
-- SSH com autenticação por chave
-- Firewall UFW
+* **Sistema Operacional:** Linux (Ubuntu Server 22.04 LTS)
+* **Provedor Cloud:** AWS EC2
+* **Acesso Remoto:** SSH com autenticação por par de chaves (RSA)
+* **Firewall:** UFW (Uncomplicated Firewall)
 
 ## 🔒 Segurança Implementada
-- Login root desativado
-- Acesso SSH somente por chave
-- Usuários com privilégios mínimos (sudo controlado)
-- Firewall UFW ativo (deny incoming / allow outgoing)
-- Testes de acesso após hardening
 
-## 🧪 Testes Realizados
-- Login SSH via chave (usuário sysadmin)
-- Bloqueio de login root
-- Validação de firewall ativo sem perda de acesso
-- Controle de permissões sudo
+Abaixo, detalho as camadas de proteção aplicadas no servidor:
+
+### 1. Gestão de Acessos e Usuários
+* **Login Root Desativado:** O acesso direto como superusuário foi bloqueado para evitar ataques de força bruta.
+* **Usuário com Privilégios Mínimos:** Criado o usuário `sysadmin` configurado no grupo `sudo` para tarefas administrativas.
+* **Autenticação por Chave:** Desativado o login por senha; o acesso é permitido apenas via chave pública (.pub).
+
+### 2. Configuração de Firewall (UFW)
+O firewall foi configurado para seguir a política de **Menor Privilégio** (bloqueia tudo por padrão, libera apenas o necessário).
+
+| Serviço | Porta | Protocolo | Ação |
+| :--- | :--- | :--- | :--- |
+| SSH | 22 | TCP | ALLOW (Permitido) |
+| Tráfego de Entrada | Todas | - | DENY (Bloqueado) |
+| Tráfego de Saída | Todas | - | ALLOW (Permitido) |
+
+---
+
+## 🧪 Testes Realizados (Validação de Segurança)
+
+Para garantir que o hardening foi eficaz, executei os seguintes protocolos de teste:
+
+1. **Acesso via Chave SSH:**
+   - **Ação:** Tentativa de login com o usuário `sysadmin` utilizando a chave privada.
+   - **Resultado:** Acesso concedido com sucesso. ✅
+
+2. **Bloqueio de Root:**
+   - **Ação:** Tentativa de login direto como root (`ssh root@ip-do-servidor`).
+   - **Resultado:** Permissão negada pelo servidor. ✅
+
+3. **Validação do Firewall:**
+   - **Ação:** Comando `sudo ufw status` e tentativa de conexão em portas não autorizadas.
+   - **Resultado:** Firewall ativo e protegendo o perímetro sem queda de conexão na porta 22. ✅
+
+4. **Controle de Permissões Sudo:**
+   - **Ação:** Execução de comandos administrativos (`apt update`) com o novo usuário.
+   - **Resultado:** Validação de privilégios funcionando corretamente sob demanda. ✅
+
+---
 
 ## 📌 Cenário Real
-Este projeto simula a configuração de um servidor Linux seguro para uma
-pequena empresa ou profissional que precisa de acesso remoto confiável.
+Este projeto simula a configuração de um servidor Linux seguro para uma pequena empresa ou profissional que precisa de infraestrutura em nuvem confiável. Ele demonstra a capacidade de configurar um ambiente que resiste a tentativas automatizadas de invasão.
+
+---
 
 ## 👨‍💻 Autor
-Igor Cesar  
-SysAdmin / Infraestrutura (em formação)
-
+**Igor Cesar** *SysAdmin / CLOUD Infraestrutura (em formação)*
