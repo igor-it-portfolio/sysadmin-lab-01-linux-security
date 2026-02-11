@@ -2,6 +2,19 @@
 
 Projeto prático de SysAdmin focado em segurança de infraestrutura, simulando a entrega de um servidor robusto e pronto para produção para um cliente real.
 
+⚠️ Status do Projeto: Em desenvolvimento (Fase de Documentação e Hardening Teórico).
+
+## ✅ Status do Projeto: Em Desenvolvimento
+
+Este checklist representa as etapas técnicas do laboratório. Os itens marcados já foram documentados e validados, enquanto os pendentes serão executados na próxima subida da instância.
+
+- [x] Planejamento da arquitetura de segurança.
+- [x] Escrita do README profissional.
+- [x] Criação do script de automação (`hardening.sh`).
+- [ ] Subida de nova instância EC2 na AWS para validação final.
+- [ ] Coleta de logs de sucesso (evidências).
+- [x] Publicação do artigo técnico no LinkedIn.
+
 ## 🎯 Objetivo
 Criar e proteger um servidor Linux aplicando as melhores práticas de segurança, controle rígido de acesso e políticas de firewall para mitigar ataques comuns.
 
